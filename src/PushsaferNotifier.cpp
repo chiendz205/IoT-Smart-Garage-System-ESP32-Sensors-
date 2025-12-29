@@ -1,9 +1,9 @@
 // PushsaferNotifier.cpp
-#include "pushsafer.h"
+#include "PushsaferNotifier.h"
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-// Global instance
+// Global instance (optional)
 PushsaferNotifier psNotifier;
 
 // ============================================
@@ -198,6 +198,44 @@ bool PushsaferNotifier::sendHTTPRequest(String postData) {
     }
 }
 
+// ============================================
+// GỬI CƠ BẢN
+// ============================================
+
+bool PushsaferNotifier::send(String title, String message) {
+    PushNotification notif;
+    notif.title = title;
+    notif.message = message;
+    notif.priority = PRIORITY_NORMAL;
+    notif.sound = SOUND_AHEM;
+    notif.icon = ICON_INFO;
+    notif.iconColor = "";
+    notif.vibration = VIBRATION_MEDIUM;
+    notif.timeToLive = 0;
+    notif.retry = 0;
+    notif.expire = 0;
+    notif.device = "a";
+    
+    return sendNotification(notif);
+}
+
+bool PushsaferNotifier::send(String title, String message, int priority) {
+    PushNotification notif;
+    notif.title = title;
+    notif.message = message;
+    notif.priority = priority;
+    notif.sound = (priority >= PRIORITY_HIGH) ? SOUND_ALARM : SOUND_AHEM;
+    notif.icon = (priority >= PRIORITY_HIGH) ? ICON_WARNING : ICON_INFO;
+    notif.iconColor = "";
+    notif.vibration = (priority >= PRIORITY_HIGH) ? VIBRATION_HIGH : VIBRATION_MEDIUM;
+    notif.timeToLive = 0;
+    notif.retry = 0;
+    notif.expire = 0;
+    notif.device = "a";
+    
+    return sendNotification(notif);
+}
+
 bool PushsaferNotifier::sendNotification(PushNotification notification) {
     String postData = buildPostData(notification);
     return sendHTTPRequest(postData);
@@ -263,7 +301,7 @@ bool PushsaferNotifier::sendVehicleDetected(float distance) {
     
     PushNotification notif;
     notif.title = "🚗 Xe đang chờ";
-    notif.message = "Phát hiện xe trước cửa garage (" + String(distance, 1) + "cm)";
+    notif.message = "Phát hiện xe trước cửa garage (" + String(distance, 1) + " cm)";
     notif.priority = PRIORITY_HIGH;
     notif.sound = SOUND_ALARM;
     notif.icon = ICON_CAR;
@@ -301,7 +339,7 @@ bool PushsaferNotifier::sendHighSmoke(int smokeLevel) {
     
     PushNotification notif;
     notif.title = "💨 Cảnh báo khói";
-    notif.message = "Mức khói cao: " + String(smokeLevel) + ". Kiểm tra garage ngay!";
+    notif.message = "Mức khói cao: " + String(smokeLevel) + " ppm. Kiểm tra garage ngay!";
     notif.priority = PRIORITY_HIGH;
     notif.sound = SOUND_ALARM;
     notif.icon = ICON_WARNING;
@@ -335,24 +373,95 @@ bool PushsaferNotifier::sendAlarmActivated(const char* reason) {
 }
 
 // ============================================
-// UTILITIES
+// NORMAL PRIORITY NOTIFICATIONS - PRIORITY 0
 // ============================================
 
-bool PushsaferNotifier::sendTest() {
+bool PushsaferNotifier::sendDoorOpened(const char* reason) {
+    Serial.println("[Pushsafer] Sending door opened notification");
+    
     PushNotification notif;
-    notif.title = "Test Notification";
-    notif.message = "Hệ thống thông báo garage hoạt động bình thường";
-    notif.priority = PRIORITY_HIGH;
-    notif.sound = SOUND_ALARM;
-    notif.icon = ICON_CAR;
-    notif.iconColor = "#0066FF";
-    notif.vibration = VIBRATION_MEDIUM;
+    notif.title = "🚪 Cửa garage";
+    notif.message = "Cửa đã mở: " + String(reason);
+    notif.priority = PRIORITY_NORMAL;
+    notif.sound = SOUND_POSITIVE;
+    notif.icon = ICON_HOME;
+    notif.iconColor = "#00FF00";
+    notif.vibration = VIBRATION_LOW;
     notif.timeToLive = 0;
     notif.retry = 0;
     notif.expire = 0;
     notif.device = "a";
     
     return sendNotification(notif);
+}
+
+bool PushsaferNotifier::sendDoorClosed(const char* reason) {
+    Serial.println("[Pushsafer] Sending door closed notification");
+    
+    PushNotification notif;
+    notif.title = "🚪 Cửa garage";
+    notif.message = "Cửa đã đóng: " + String(reason);
+    notif.priority = PRIORITY_NORMAL;
+    notif.sound = SOUND_POSITIVE;
+    notif.icon = ICON_HOME;
+    notif.iconColor = "#0000FF";
+    notif.vibration = VIBRATION_LOW;
+    notif.timeToLive = 0;
+    notif.retry = 0;
+    notif.expire = 0;
+    notif.device = "a";
+    
+    return sendNotification(notif);
+}
+
+bool PushsaferNotifier::sendAlarmDeactivated(const char* source) {
+    Serial.println("[Pushsafer] Sending alarm deactivated");
+    
+    PushNotification notif;
+    notif.title = "✅ Báo động tắt";
+    notif.message = "Báo động đã tắt bởi: " + String(source);
+    notif.priority = PRIORITY_NORMAL;
+    notif.sound = SOUND_POSITIVE;
+    notif.icon = ICON_SUCCESS;
+    notif.iconColor = "#00FF00";
+    notif.vibration = VIBRATION_LOW;
+    notif.timeToLive = 0;
+    notif.retry = 0;
+    notif.expire = 0;
+    notif.device = "a";
+    
+    return sendNotification(notif);
+}
+
+// ============================================
+// LOW PRIORITY NOTIFICATIONS - PRIORITY -1
+// ============================================
+
+bool PushsaferNotifier::sendSystemOnline() {
+    Serial.println("[Pushsafer] Sending system online");
+    
+    PushNotification notif;
+    notif.title = "💡 Hệ thống garage";
+    notif.message = "Hệ thống garage thông minh đã online";
+    notif.priority = PRIORITY_LOW;
+    notif.sound = SOUND_SILENT;
+    notif.icon = ICON_INFO;
+    notif.iconColor = "#0066FF";
+    notif.vibration = VIBRATION_LOW;
+    notif.timeToLive = 0;
+    notif.retry = 0;
+    notif.expire = 0;
+    notif.device = "a";
+    
+    return sendNotification(notif);
+}
+
+// ============================================
+// UTILITIES
+// ============================================
+
+bool PushsaferNotifier::sendTest() {
+    return send("Test Notification", "Hệ thống thông báo garage hoạt động bình thường");
 }
 
 int PushsaferNotifier::getSendCount() {
