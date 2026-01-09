@@ -4,7 +4,7 @@
 
 #include <Arduino.h>
 #include <ESP32Servo.h>
-#include <Bonezegei_DHT22.h>
+#include <DHTesp.h>
 #include "config.h"
 
 // ============================================
@@ -13,7 +13,6 @@
 struct SensorData {
   float temperatureDHT;
   float humidity;
-  float temperatureDS;
   int smokeLevel;
   float distanceOutside;
   float distanceInside;
@@ -37,21 +36,13 @@ int readGasSensor(int gasPin);
 // Temperature Sensor (DS18B20 analog)
 float readTemperatureSensor(int tempPin);
 
-// LED Control
-void setLED(int pin, bool state);
-void blinkLED(int pin, int times, int delayMs);
-
-// Buzzer Control
-void activateBuzzer(int pin, int frequency, int durationMs);
-void beep(int pin, int times);
-
 // Servo Control
 void moveDoorServo(Servo& servo, int angle);
 void openDoor(Servo& servo);
 void closeDoor(Servo& servo);
 
 // Read All Sensors
-SensorData readAllSensors(Bonezegei_DHT22& dht);
+SensorData readAllSensors(DHTesp& dht);
 
 // Print Sensor Data
 void printSensorData(const SensorData& data);

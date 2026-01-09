@@ -9,7 +9,6 @@
 // PRIORITY LEVELS
 // ============================================
 
-#define PRIORITY_SILENT    -2  // Không notification, chỉ badge
 #define PRIORITY_LOW       -1  // Không âm thanh
 #define PRIORITY_NORMAL     0  // Âm thanh mặc định
 #define PRIORITY_HIGH       1  // Âm thanh cao hơn
@@ -114,46 +113,46 @@ public:
     // GARAGE NOTIFICATIONS - CRITICAL (Priority 2)
     // ============================================
     
-    // 🚨 Đột nhập
+    // Đột nhập
     bool sendIntrusionAlert(bool pirDetected, bool ultrasonicDetected);
     
-    // 🔥 Hỏa hoạn
+    // Hỏa hoạn
     bool sendFireAlert(float temperature, int smokeLevel, float humidity);
     
     // ============================================
     // GARAGE NOTIFICATIONS - HIGH PRIORITY (Priority 1)
     // ============================================
     
-    // 🚗 Phát hiện xe trước cửa
+    // Phát hiện xe trước cửa
     bool sendVehicleDetected(float distance);
     
-    // 🌡️ Cảnh báo nhiệt độ cao
+    // Cảnh báo nhiệt độ cao
     bool sendHighTemperature(float temperature);
     
-    // 💨 Cảnh báo khói cao
+    // Cảnh báo khói cao
     bool sendHighSmoke(int smokeLevel);
     
-    // ⚠️ Báo động bật
+    // Báo động bật
     bool sendAlarmActivated(const char* reason);
     
     // ============================================
     // GARAGE NOTIFICATIONS - NORMAL PRIORITY (Priority 0)
     // ============================================
     
-    // 🚪 Cửa mở
+    // Cửa mở
     bool sendDoorOpened(const char* reason);
     
-    // 🚪 Cửa đóng
+    // Cửa đóng
     bool sendDoorClosed(const char* reason);
     
-    // ✅ Báo động tắt
+    // Báo động tắt
     bool sendAlarmDeactivated(const char* source);
     
     // ============================================
     // GARAGE NOTIFICATIONS - LOW PRIORITY (Priority -1)
     // ============================================
     
-    // 💡 Hệ thống online
+    // Hệ thống online
     bool sendSystemOnline();
     
     // ============================================

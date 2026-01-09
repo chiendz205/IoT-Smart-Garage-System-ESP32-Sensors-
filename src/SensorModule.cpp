@@ -10,10 +10,10 @@ float readUltrasonic(int echoPin, int trigPin) {
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
-  
+
   long duration = pulseIn(echoPin, HIGH, 30000);
   if (duration == 0) return MAX_DISTANCE;
-  
+
   float distance = (duration * 0.034) / 2.0;
   return (distance > MAX_DISTANCE) ? MAX_DISTANCE : distance;
 }
@@ -29,8 +29,8 @@ bool readPIR(int pirPin) {
 // GAS/SMOKE SENSOR
 // ============================================
 int readGasSensor(int gasPin) {
-  int rawValue = analogRead(gasPin);
-  return map(rawValue, 0, 4095, 0, 1000);
+  int raw = analogRead((gasPin));
+  return map(raw, 0, 4095, 0, 1000);
 }
 
 // ============================================
@@ -41,35 +41,6 @@ float readTemperatureSensor(int tempPin) {
   return (rawValue / 4095.0) * 100.0;
 }
 
-// ============================================
-// LED CONTROL
-// ============================================
-void setLED(int pin, bool state) {
-  digitalWrite(pin, state ? HIGH : LOW);
-}
-
-void blinkLED(int pin, int times, int delayMs) {
-  for (int i = 0; i < times; i++) {
-    digitalWrite(pin, HIGH);
-    delay(delayMs);
-    digitalWrite(pin, LOW);
-    delay(delayMs);
-  }
-}
-
-// ============================================
-// BUZZER CONTROL
-// ============================================
-void activateBuzzer(int pin, int frequency, int durationMs) {
-  tone(pin, frequency, durationMs);
-}
-
-void beep(int pin, int times) {
-  for (int i = 0; i < times; i++) {
-    tone(pin, 1000, 200);
-    delay(300);
-  }
-}
 
 // ============================================
 // SERVO CONTROL
@@ -99,26 +70,23 @@ void closeDoor(Servo& servo) {
 // ============================================
 // READ ALL SENSORS
 // ============================================
-SensorData readAllSensors(Bonezegei_DHT22& dht) {
+SensorData readAllSensors(DHTesp& dht) {
   SensorData data;
   data.timestamp = millis();
-  
+
   // DHT22
-  if (dht.getData()) {
-    data.temperatureDHT = dht.getTemperature();
-    data.humidity = dht.getHumidity();
-  } else {
-    data.temperatureDHT = -999;
-    data.humidity = -999;
-  }
-  
+TempAndHumidity values = dht.getTempAndHumidity();
+
+data.temperatureDHT = values.temperature;
+data.humidity    = values.humidity;
+
+
   // Other sensors
-  data.temperatureDS = readTemperatureSensor(TEMP_SENSOR_PIN);
   data.smokeLevel = readGasSensor(GAS_SENSOR_PIN);
   data.distanceOutside = readUltrasonic(ECHO_OUTSIDE_PIN, TRIG_OUTSIDE_PIN);
   data.distanceInside = readUltrasonic(ECHO_INSIDE_PIN, TRIG_INSIDE_PIN);
   data.pirMotion = readPIR(PIR_PIN);
-  
+
   return data;
 }
 
@@ -129,7 +97,6 @@ void printSensorData(const SensorData& data) {
   Serial.println("\n📊 ==================== SENSOR DATA ====================");
   Serial.print("Temperature (DHT):  "); Serial.print(data.temperatureDHT, 1); Serial.println(" °C");
   Serial.print("Humidity:           "); Serial.print(data.humidity, 1); Serial.println(" %");
-  Serial.print("Temperature (DS):   "); Serial.print(data.temperatureDS, 1); Serial.println(" °C");
   Serial.print("Smoke Level:        "); Serial.print(data.smokeLevel); Serial.println(" ppm");
   Serial.print("Distance (Outside): "); Serial.print(data.distanceOutside, 1); Serial.println(" cm");
   Serial.print("Distance (Inside):  "); Serial.print(data.distanceInside, 1); Serial.println(" cm");

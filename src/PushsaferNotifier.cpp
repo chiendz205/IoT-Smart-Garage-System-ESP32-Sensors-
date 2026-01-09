@@ -47,7 +47,7 @@ void PushsaferNotifier::begin() {
     }
     
     initialized = true;
-    Serial.println("[Pushsafer] ✓ Ready!");
+    Serial.println("[Pushsafer] Ready!");
 }
 
 void PushsaferNotifier::begin(String key) {

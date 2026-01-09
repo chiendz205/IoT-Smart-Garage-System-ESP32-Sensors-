@@ -25,18 +25,18 @@
 #define TOPIC_PIR               "garage/sensors/pir"
 #define TOPIC_ALARM_STATUS      "garage/alarm/status"
 #define TOPIC_ALARM_CMD         "garage/alarm/cmd"
+#define TOPIC_VEHICLE_DETECTED  "garage/vehicle/detected"  
 
 // ============================================
 // PUSHSAFER CONFIGURATION
 // ============================================
-#define PUSHSAFER_API_KEY       "YOUR_PUSHSAFER_KEY"
+#define PUSHSAFER_API_KEY       "fkPI1VfJf8rTl3eQsLmD"
 #define PUSHSAFER_API_URL       "https://www.pushsafer.com/api"
 
 // ============================================
 // THINGSPEAK CONFIGURATION
 // ============================================
-#define THINGSPEAK_API_KEY      "YOUR_THINGSPEAK_WRITE_KEY"
-#define THINGSPEAK_CHANNEL_ID   0  // Your channel ID
+#define THINGSPEAK_API_KEY      "R0466HY1GPPY1O2V"
 #define THINGSPEAK_SERVER       "api.thingspeak.com"
 
 // ============================================
@@ -65,7 +65,6 @@
 
 // Sensors
 #define DHT_PIN                 16
-#define TEMP_SENSOR_PIN         35
 #define GAS_SENSOR_PIN          34
 
 // ============================================
@@ -74,7 +73,7 @@
 
 // Distance thresholds
 #define VEHICLE_DETECT_DISTANCE 100.0  // cm
-#define MAX_DISTANCE            400.0  // cm
+#define MAX_DISTANCE            400.0
 
 // Temperature thresholds
 #define TEMP_WARNING_THRESHOLD  45.0   // °C
@@ -100,14 +99,12 @@ enum DoorState {
   DOOR_OPEN,
   DOOR_CLOSING
 };
-
-// ============================================
-// ALARM STATES
-// ============================================
+// ALARM STATE
 enum AlarmState {
   ALARM_OFF,
   ALARM_ON,
-  ALARM_TRIGGERED
+  ALARM_FIRE,
+  ALARM_INTRUSION
 };
 
 #endif

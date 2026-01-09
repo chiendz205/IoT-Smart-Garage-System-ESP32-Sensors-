@@ -81,11 +81,8 @@ bool ThingSpeakLogger::uploadSensorData(const SensorData& data) {
   // Field 5: PIR Motion (0 or 1)
   url += "&field5=" + String(data.pirMotion ? 1 : 0);
   
-  // Field 6: Temperature (DS18B20)
-  url += "&field6=" + String(data.temperatureDS, 2);
-  
-  // Field 7: Distance Inside
-  url += "&field7=" + String(data.distanceInside, 2);
+  // Field 6: Distance Inside
+  url += "&field6=" + String(data.distanceInside, 2);
   
   Serial.print("[ThingSpeak] 📤 Uploading data... ");
   
