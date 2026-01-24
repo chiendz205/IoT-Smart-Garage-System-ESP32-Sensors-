@@ -30,15 +30,7 @@ bool readPIR(int pirPin) {
 // ============================================
 int readGasSensor(int gasPin) {
   int raw = analogRead((gasPin));
-  return map(raw, 0, 4095, 0, 1000);
-}
-
-// ============================================
-// TEMPERATURE SENSOR (DS18B20 analog)
-// ============================================
-float readTemperatureSensor(int tempPin) {
-  int rawValue = analogRead(tempPin);
-  return (rawValue / 4095.0) * 100.0;
+  return (raw / 4041.0) * 1000;
 }
 
 
@@ -75,10 +67,10 @@ SensorData readAllSensors(DHTesp& dht) {
   data.timestamp = millis();
 
   // DHT22
-TempAndHumidity values = dht.getTempAndHumidity();
+  TempAndHumidity values = dht.getTempAndHumidity();
 
-data.temperatureDHT = values.temperature;
-data.humidity    = values.humidity;
+  data.temperatureDHT = values.temperature;
+  data.humidity    = values.humidity;
 
 
   // Other sensors

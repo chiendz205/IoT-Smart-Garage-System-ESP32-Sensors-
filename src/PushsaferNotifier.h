@@ -169,7 +169,4 @@ public:
     void resetCounter();
 };
 
-// Global instance (optional)
-extern PushsaferNotifier psNotifier;
-
 #endif

@@ -1,0 +1,1014 @@
+[
+    {
+        "id": "4e832124b9b5d774",
+        "type": "tab",
+        "label": "Smart Garage System",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "9f44bb370928f578",
+        "type": "ui-button",
+        "z": "4e832124b9b5d774",
+        "group": "27aced2ea1662988",
+        "name": "Mở cửa",
+        "label": "MỞ CỬA",
+        "order": 1,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "tooltip": "Nhấn để mở cửa garage",
+        "color": "white",
+        "bgcolor": "#4CAF50",
+        "className": "",
+        "icon": "door-open",
+        "iconPosition": "left",
+        "payload": "OPEN",
+        "payloadType": "str",
+        "topic": "garage/door/cmd",
+        "topicType": "str",
+        "x": 130,
+        "y": 100,
+        "wires": [
+            [
+                "dae03f270e7662c2"
+            ]
+        ]
+    },
+    {
+        "id": "0107c0169d94d6ba",
+        "type": "ui-button",
+        "z": "4e832124b9b5d774",
+        "group": "27aced2ea1662988",
+        "name": "Đóng cửa",
+        "label": "ĐÓNG CỬA",
+        "order": 2,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "tooltip": "Nhấn để đóng cửa garage",
+        "color": "white",
+        "bgcolor": "#f44336",
+        "className": "",
+        "icon": "door-closed",
+        "iconPosition": "left",
+        "payload": "CLOSE",
+        "payloadType": "str",
+        "topic": "garage/door/cmd",
+        "topicType": "str",
+        "enableClick": true,
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "dae03f270e7662c2"
+            ]
+        ]
+    },
+    {
+        "id": "dae03f270e7662c2",
+        "type": "mqtt out",
+        "z": "4e832124b9b5d774",
+        "name": "MQTT Door Control",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "broker": "ed4fc97d75a66579",
+        "x": 380,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "8715e81120f2f9f8",
+        "type": "ui-button",
+        "z": "4e832124b9b5d774",
+        "group": "27aced2ea1662988",
+        "name": "Alarm ON",
+        "label": "BẬT BÁO ĐỘNG",
+        "order": 3,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "tooltip": "Bật hệ thống báo động",
+        "color": "white",
+        "bgcolor": "#FF9800",
+        "className": "",
+        "icon": "shield",
+        "iconPosition": "left",
+        "payload": "ON",
+        "payloadType": "str",
+        "topic": "garage/alarm/cmd",
+        "topicType": "str",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "bf4edc3fc3c14b3e"
+            ]
+        ]
+    },
+    {
+        "id": "34fc1bf28c71d0cc",
+        "type": "ui-button",
+        "z": "4e832124b9b5d774",
+        "group": "27aced2ea1662988",
+        "name": "Alarm OFF",
+        "label": "TẮT BÁO ĐỘNG",
+        "order": 4,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "tooltip": "Tắt hệ thống báo động",
+        "color": "white",
+        "bgcolor": "#9E9E9E",
+        "className": "",
+        "icon": "shield-off",
+        "iconPosition": "left",
+        "payload": "OFF",
+        "payloadType": "str",
+        "topic": "garage/alarm/cmd",
+        "topicType": "str",
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "bf4edc3fc3c14b3e"
+            ]
+        ]
+    },
+    {
+        "id": "bf4edc3fc3c14b3e",
+        "type": "mqtt out",
+        "z": "4e832124b9b5d774",
+        "name": "MQTT Alarm Control",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "broker": "ed4fc97d75a66579",
+        "x": 390,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "bc3f07eadb68071a",
+        "type": "mqtt in",
+        "z": "4e832124b9b5d774",
+        "name": "Temperature",
+        "topic": "garage/sensors/temperature",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "ed4fc97d75a66579",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 340,
+        "wires": [
+            [
+                "9082e114422f12aa",
+                "1e4b4dea8c52c0f4"
+            ]
+        ]
+    },
+    {
+        "id": "98c2342ad6a2ca62",
+        "type": "mqtt in",
+        "z": "4e832124b9b5d774",
+        "name": "Humidity",
+        "topic": "garage/sensors/humidity",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "ed4fc97d75a66579",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 400,
+        "wires": [
+            [
+                "51a61bb16a0b3a40"
+            ]
+        ]
+    },
+    {
+        "id": "0ee9762e36f39333",
+        "type": "mqtt in",
+        "z": "4e832124b9b5d774",
+        "name": "Smoke Level",
+        "topic": "garage/sensors/smoke",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "ed4fc97d75a66579",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 440,
+        "wires": [
+            [
+                "20bac7d6a0bb1098",
+                "9c3df7b75dc4ae1f"
+            ]
+        ]
+    },
+    {
+        "id": "421ba66888e4414a",
+        "type": "mqtt in",
+        "z": "4e832124b9b5d774",
+        "name": "Distance Outside",
+        "topic": "garage/sensors/distance/outside",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "ed4fc97d75a66579",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 480,
+        "wires": [
+            [
+                "d38bb2b34d4a1f2b"
+            ]
+        ]
+    },
+    {
+        "id": "f9729cbdf4f9d073",
+        "type": "mqtt in",
+        "z": "4e832124b9b5d774",
+        "name": "Distance Inside",
+        "topic": "garage/sensors/distance/inside",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "ed4fc97d75a66579",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 540,
+        "wires": [
+            [
+                "4e3a5b6f68e60267"
+            ]
+        ]
+    },
+    {
+        "id": "5fefebc7a765f12e",
+        "type": "mqtt in",
+        "z": "4e832124b9b5d774",
+        "name": "PIR Motion",
+        "topic": "garage/sensors/pir",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "ed4fc97d75a66579",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 680,
+        "wires": [
+            [
+                "c1126421bfc8edee"
+            ]
+        ]
+    },
+    {
+        "id": "c1126421bfc8edee",
+        "type": "function",
+        "z": "4e832124b9b5d774",
+        "name": "Format PIR Status",
+        "func": "let status = msg.payload.toString();\n\nif (status === \"DETECTED\") {\n    msg.payload = \"🔴 PHÁT HIỆN CHUYỂN ĐỘNG\";\n} else if (status === \"CLEAR\") {\n    msg.payload = \"🟢 Không có chuyển động\";\n} else {\n    msg.payload = status;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 700,
+        "wires": [
+            [
+                "e0b148ec9d49e146"
+            ]
+        ]
+    },
+    {
+        "id": "be2ba4dcde7bb39d",
+        "type": "mqtt in",
+        "z": "4e832124b9b5d774",
+        "name": "Door Status",
+        "topic": "garage/door/status",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "ed4fc97d75a66579",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 740,
+        "wires": [
+            [
+                "252664b2c18e8476"
+            ]
+        ]
+    },
+    {
+        "id": "252664b2c18e8476",
+        "type": "function",
+        "z": "4e832124b9b5d774",
+        "name": "Filter Door Status",
+        "func": "let status = msg.payload.toString();\n\n// Lọc bỏ các message không phải trạng thái cửa\nif (status === \"ONLINE\" || status === \"VEHICLE_WAITING\") {\n    return null; // Không hiển thị\n}\n\n// Chuyển đổi sang tiếng Việt\nif (status === \"OPENED\") {\n    msg.payload = \"🟢 MỞ\";\n} else if (status === \"CLOSED\") {\n    msg.payload = \"🔴 ĐÓNG\";\n} else {\n    msg.payload = status;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 740,
+        "wires": [
+            [
+                "8be30b74520aa4ed"
+            ]
+        ]
+    },
+    {
+        "id": "b896ca74a9657fc4",
+        "type": "mqtt in",
+        "z": "4e832124b9b5d774",
+        "name": "Alarm Status",
+        "topic": "garage/alarm/status",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "ed4fc97d75a66579",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 860,
+        "wires": [
+            [
+                "1f6b31a6b032a04e",
+                "3f6ea841e93c2b87",
+                "51011a990577bc3c"
+            ]
+        ]
+    },
+    {
+        "id": "1f6b31a6b032a04e",
+        "type": "function",
+        "z": "4e832124b9b5d774",
+        "name": "Format Alarm Status",
+        "func": "let status = msg.payload.toString();\n\nif (status === \"ON\") {\n    msg.payload = \"🟢 BẬT\";\n} else if (status === \"OFF\") {\n    msg.payload = \"⚪ TẮT\";\n} else if (status === \"FIRE_DETECTED\") {\n    msg.payload = \"🔥 CHÁY!\";\n} else if (status === \"INTRUSION_DETECTED\") {\n    msg.payload = \"🚨 XÂM NHẬP!\";\n} else {\n    msg.payload = status;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 800,
+        "wires": [
+            [
+                "7badba54e88cb49f"
+            ]
+        ]
+    },
+    {
+        "id": "9082e114422f12aa",
+        "type": "ui-gauge",
+        "z": "4e832124b9b5d774",
+        "name": "Nhiệt độ",
+        "group": "40e8c7c98257b7f0",
+        "order": 1,
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Nhiệt độ",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#2196F3"
+            },
+            {
+                "from": "20",
+                "color": "#4CAF50"
+            },
+            {
+                "from": "40",
+                "color": "#FF9800"
+            },
+            {
+                "from": "50",
+                "color": "#f44336"
+            }
+        ],
+        "min": 0,
+        "max": "70",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 360,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "51a61bb16a0b3a40",
+        "type": "ui-gauge",
+        "z": "4e832124b9b5d774",
+        "name": "Độ ẩm",
+        "group": "40e8c7c98257b7f0",
+        "order": 2,
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Độ ẩm",
+        "units": "%",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#f44336"
+            },
+            {
+                "from": "30",
+                "color": "#FF9800"
+            },
+            {
+                "from": "40",
+                "color": "#4CAF50"
+            },
+            {
+                "from": "70",
+                "color": "#2196F3"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 350,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "20bac7d6a0bb1098",
+        "type": "ui-gauge",
+        "z": "4e832124b9b5d774",
+        "name": "Khí gas",
+        "group": "40e8c7c98257b7f0",
+        "order": 3,
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Mức khí gas",
+        "units": "ppm",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#4CAF50"
+            },
+            {
+                "from": "400",
+                "color": "#FF9800"
+            },
+            {
+                "from": "600",
+                "color": "#f44336"
+            }
+        ],
+        "min": 0,
+        "max": "1000",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 360,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d38bb2b34d4a1f2b",
+        "type": "ui-text",
+        "z": "4e832124b9b5d774",
+        "group": "d8441dc01578b0d7",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "name": "Khoảng cách ngoài",
+        "label": "Xe ở ngoài",
+        "format": "{{msg.payload}} cm",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "className": "",
+        "x": 390,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "4e3a5b6f68e60267",
+        "type": "ui-text",
+        "z": "4e832124b9b5d774",
+        "group": "d8441dc01578b0d7",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "Khoảng cách trong",
+        "label": "Xe ở trong",
+        "format": "{{msg.payload}} cm",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "className": "",
+        "x": 390,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "8be30b74520aa4ed",
+        "type": "ui-text",
+        "z": "4e832124b9b5d774",
+        "group": "01fe3fb055ca9b55",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "name": "Trạng thái cửa",
+        "label": "Trạng thái cửa",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 18,
+        "color": "#000000",
+        "className": "",
+        "x": 680,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "e0b148ec9d49e146",
+        "type": "ui-text",
+        "z": "4e832124b9b5d774",
+        "group": "01fe3fb055ca9b55",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "Cảm biến chuyển động",
+        "label": "Chuyển động",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 18,
+        "color": "#000000",
+        "className": "",
+        "x": 710,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "7badba54e88cb49f",
+        "type": "ui-text",
+        "z": "4e832124b9b5d774",
+        "group": "01fe3fb055ca9b55",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "name": "Trạng thái báo động",
+        "label": "Báo động",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 18,
+        "color": "#000000",
+        "className": "",
+        "x": 700,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "3f6ea841e93c2b87",
+        "type": "function",
+        "z": "4e832124b9b5d774",
+        "name": "Check Fire Alert",
+        "func": "let status = msg.payload.toString();\n\nif (status === \"FIRE_DETECTED\") {\n    return {payload: \"🔥 CẢNH BÁO CHÁY! Hệ thống chữa cháy đã được kích hoạt!\"};\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 840,
+        "wires": [
+            [
+                "903422322f49ae02"
+            ]
+        ]
+    },
+    {
+        "id": "51011a990577bc3c",
+        "type": "function",
+        "z": "4e832124b9b5d774",
+        "name": "Check Intrusion Alert",
+        "func": "let status = msg.payload.toString();\n\nif (status === \"INTRUSION_DETECTED\") {\n    return {payload: \"🚨 CẢNH BÁO XÂM NHẬP! Phát hiện chuyển động bất thường!\"};\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 880,
+        "wires": [
+            [
+                "3969887fa86573f0"
+            ]
+        ]
+    },
+    {
+        "id": "9c3df7b75dc4ae1f",
+        "type": "function",
+        "z": "4e832124b9b5d774",
+        "name": "Check Smoke Level",
+        "func": "let smokeLevel = parseFloat(msg.payload);\n\nif (smokeLevel > 800) {\n    return {payload: `⚠️ MỨC KHÍ GAS NGUY HIỂM: ${smokeLevel} ppm!`};\n} else if (smokeLevel > 600) {\n    return {payload: `⚠️ Cảnh báo: Mức khí gas cao (${smokeLevel} ppm)`};\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 580,
+        "wires": [
+            [
+                "2a6f118c54df2a39"
+            ]
+        ]
+    },
+    {
+        "id": "903422322f49ae02",
+        "type": "ui-notification",
+        "z": "4e832124b9b5d774",
+        "ui": "87e60cf877903234",
+        "position": "top center",
+        "colorDefault": true,
+        "color": "#ff0000",
+        "displayTime": "0",
+        "showCountdown": true,
+        "outputs": 1,
+        "allowDismiss": true,
+        "dismissText": "Đóng",
+        "raw": false,
+        "className": "",
+        "name": "Fire Notification",
+        "x": 680,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3969887fa86573f0",
+        "type": "ui-notification",
+        "z": "4e832124b9b5d774",
+        "ui": "87e60cf877903234",
+        "position": "top center",
+        "colorDefault": true,
+        "color": "#ff9800",
+        "displayTime": "0",
+        "showCountdown": true,
+        "outputs": 1,
+        "allowDismiss": true,
+        "dismissText": "Đóng",
+        "raw": false,
+        "className": "",
+        "name": "Intrusion Notification",
+        "x": 700,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2a6f118c54df2a39",
+        "type": "ui-notification",
+        "z": "4e832124b9b5d774",
+        "ui": "87e60cf877903234",
+        "position": "top center",
+        "colorDefault": true,
+        "color": "#ff9800",
+        "displayTime": "10",
+        "showCountdown": true,
+        "outputs": 1,
+        "allowDismiss": true,
+        "dismissText": "Đóng",
+        "raw": false,
+        "className": "",
+        "name": "Smoke Notification",
+        "x": 690,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1e4b4dea8c52c0f4",
+        "type": "debug",
+        "z": "4e832124b9b5d774",
+        "name": "Debug Temp",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 370,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "27aced2ea1662988",
+        "type": "ui-group",
+        "name": "🚪 Điều khiển cửa & báo động",
+        "page": "ef11d099fb110376",
+        "width": "12",
+        "height": "2",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ed4fc97d75a66579",
+        "type": "mqtt-broker",
+        "name": "Mosquitto Public",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "40e8c7c98257b7f0",
+        "type": "ui-group",
+        "name": "🌡️ Cảm biến môi trường",
+        "page": "74b8e3d33b6fba9c",
+        "width": "12",
+        "height": "3",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "d8441dc01578b0d7",
+        "type": "ui-group",
+        "name": "📏 Cảm biến khoảng cách",
+        "page": "74b8e3d33b6fba9c",
+        "width": "12",
+        "height": "1",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "01fe3fb055ca9b55",
+        "type": "ui-group",
+        "name": "📡 Trạng thái hệ thống",
+        "page": "c7778b02d6d9ca55",
+        "width": "12",
+        "height": "3",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "87e60cf877903234",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "ef11d099fb110376",
+        "type": "ui-page",
+        "name": "🎛️ Điều khiển",
+        "ui": "87e60cf877903234",
+        "path": "/control",
+        "icon": "gamepad",
+        "layout": "grid",
+        "theme": "02bc1996149a842a",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "74b8e3d33b6fba9c",
+        "type": "ui-page",
+        "name": "📊 Giám sát",
+        "ui": "87e60cf877903234",
+        "path": "/monitor",
+        "icon": "chart-line",
+        "layout": "grid",
+        "theme": "02bc1996149a842a",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "c7778b02d6d9ca55",
+        "type": "ui-page",
+        "name": "📡 Trạng thái",
+        "ui": "87e60cf877903234",
+        "path": "/status",
+        "icon": "info-circle",
+        "layout": "grid",
+        "theme": "02bc1996149a842a",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 3,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "02bc1996149a842a",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "5e82c48bc8ac2c9b",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.29.0"
+        }
+    }
+]

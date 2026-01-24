@@ -86,7 +86,7 @@ void setup() {
 void loop() {
   unsigned long now = millis();
 
-  // Handle alarm blinking
+  //handleAlarm Manual
   handleAlarm();
 
   // MQTT connection
@@ -212,29 +212,6 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
       Serial.println("-> Alarm: OFF");
       alarmState = ALARM_OFF;
     }
-  }
-}
-
-// Alarm Manual Blinking
-unsigned long lastBlink = 0;
-bool blinkState = false;
-
-void handleAlarm() {
-  if (alarmState != ALARM_ON) return;
-
-  unsigned long now = millis();
-
-  if (now - lastBlink >= 200) {
-    lastBlink = now;
-    blinkState = !blinkState;
-
-    digitalWrite(LED_INSIDE_PIN, blinkState);
-    digitalWrite(LED_OUTSIDE_PIN, blinkState);
-
-    if (blinkState)
-      tone(BUZZER_PIN, 2000);
-    else
-      noTone(BUZZER_PIN);
   }
 }
 
@@ -379,6 +356,31 @@ void checkIntrusionDetection() {
     mqttClient.publish(TOPIC_ALARM_STATUS, "OFF");
   }
 }
+
+// Alarm Control
+unsigned long lastBlink = 0;
+bool blinkState = false;
+
+void handleAlarm() {
+  if (alarmState != ALARM_ON) return;
+
+  unsigned long now = millis();
+
+  if (now - lastBlink >= 200) {
+    lastBlink = now;
+    blinkState = !blinkState;
+
+    digitalWrite(LED_INSIDE_PIN, blinkState);
+    digitalWrite(LED_OUTSIDE_PIN, blinkState);
+
+    if (blinkState)
+      tone(BUZZER_PIN, 2000);
+    else
+      noTone(BUZZER_PIN);
+  }
+}
+
+
 
 // Door Control
 void handleDoorControl() {

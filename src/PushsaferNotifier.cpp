@@ -3,8 +3,6 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-// Global instance (optional)
-PushsaferNotifier psNotifier;
 
 // ============================================
 // CONSTRUCTOR
@@ -36,12 +34,6 @@ void PushsaferNotifier::begin() {
     if (apiKey == "YOUR_PUSHSAFER_KEY" || apiKey.length() == 0) {
         Serial.println("[Pushsafer] ⚠️ Warning: API Key not set!");
         Serial.println("[Pushsafer] Get your key from: https://www.pushsafer.com/");
-        initialized = false;
-        return;
-    }
-    
-    if (WiFi.status() != WL_CONNECTED) {
-        Serial.println("[Pushsafer] ⚠️ Warning: WiFi not connected!");
         initialized = false;
         return;
     }
@@ -273,7 +265,7 @@ bool PushsaferNotifier::sendFireAlert(float temperature, int smokeLevel, float h
     Serial.println("[Pushsafer] Sending FIRE alert!");
     
     String details = "Nhiệt độ: " + String(temperature, 1) + "°C, ";
-    details += "Khói: " + String(smokeLevel) + ", ";
+    details += "Khói: " + String(smokeLevel) + "ppm, ";
     details += "Độ ẩm: " + String(humidity, 1) + "%";
     
     PushNotification notif;

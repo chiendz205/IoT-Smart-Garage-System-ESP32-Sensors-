@@ -44,12 +44,6 @@ bool ThingSpeakLogger::uploadSensorData(const SensorData& data) {
     return false;
   }
   
-  // Check WiFi
-  if (WiFi.status() != WL_CONNECTED) {
-    Serial.println("[ThingSpeak] ❌ WiFi not connected");
-    return false;
-  }
-  
   // Check API key
   if (apiKey == "YOUR_THINGSPEAK_WRITE_KEY" || apiKey.length() == 0) {
     Serial.println("[ThingSpeak] ❌ API Key not set");
@@ -63,14 +57,10 @@ bool ThingSpeakLogger::uploadSensorData(const SensorData& data) {
   url += "?api_key=" + apiKey;
   
   // Field 1: Temperature (DHT22)
-  if (data.temperatureDHT > -900) {
-    url += "&field1=" + String(data.temperatureDHT, 2);
-  }
+  url += "&field1=" + String(data.temperatureDHT, 2);
   
   // Field 2: Humidity
-  if (data.humidity > -900) {
-    url += "&field2=" + String(data.humidity, 2);
-  }
+  url += "&field2=" + String(data.humidity, 2);
   
   // Field 3: Smoke Level
   url += "&field3=" + String(data.smokeLevel);

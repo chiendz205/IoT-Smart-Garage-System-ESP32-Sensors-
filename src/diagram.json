@@ -63,7 +63,7 @@
       "id": "dht",
       "top": 393.9,
       "left": 637.8,
-      "attrs": { "humidity": "55", "temperature": "35.6" }
+      "attrs": { "humidity": "55", "temperature": "27.3" }
     },
     { "type": "wokwi-gas-sensor", "id": "gas", "top": 501.9, "left": 477.4, "attrs": {} }
   ],
